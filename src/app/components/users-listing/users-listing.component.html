@@ -1,0 +1,42 @@
+<div class="users-container">
+<div><input type="text" [(ngModel)]="name">
+<button (click)="search()">Search</button></div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Profile</th>
+      <th scope="col">Company Name</th>
+      <th scope="col">Company Address</th>
+      <th scope="col">#</th>
+      <th scope="col">#</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let u of userList | paginate: { itemsPerPage: 10, currentPage: p }">
+      <td>{{u.id}}</td>
+      <td>{{u.firstName}} {{u.lastName}}</td>
+      <td>{{u.age}}</td>
+      <td>{{u.gender}}</td>
+      <td>{{u.email}}</td>
+      <td>{{u.phone}}</td>
+      <td><img src="{{u.image}}" ></td>
+      <td>{{u.company.name}}</td>
+      <td>{{u.company.address.address}}</td>
+      <td><button (click)="updateUser(u)" >Edit</button></td>
+      <td><button (click)="deleteUser(u)">Delete</button></td>
+    </tr>
+    <tr *ngIf="userList && userList.length === 0"><td>No Data Exists</td></tr>
+    <pagination-controls *ngIf="userList && userList.length > 0" (pageChange)="p = $event"></pagination-controls>
+
+  </tbody>
+</table>
+
+</div>
+
+
